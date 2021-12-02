@@ -1,0 +1,20 @@
+name: bench
+
+on: [push]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        nodejs: [14]
+
+    steps:
+    - uses: actions/checkout@v2
+    - uses: actions/setup-node@v2-beta
+      with:
+        node-version: ${{ matrix.nodejs }}
+
+    - run: npm install
+    - run: npm run bench
